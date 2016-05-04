@@ -1,7 +1,7 @@
 var config = {
     "map": {
         "*": {
-            "productListToolbarForm": "js/navigation-menu"
+            "productListToolbarForm": "CzoneTech_AjaxifiedCatalog/js/product/list/toolbar"
         }
     }
 };

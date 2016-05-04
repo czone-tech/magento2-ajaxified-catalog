@@ -86,7 +86,7 @@ define([
             }
         },
 
-        changeUrl: function (urlParams, paramName, paramValue, defaultValue) {
+        _prepareParams: function (urlParams, paramName, paramValue, defaultValue) {
             var paramData = {},
                 parameters;
 
@@ -152,7 +152,7 @@ define([
                 timeout: 10000
             }).done(function (response) {
                 if (response.success) {
-                    self.changeUrl(baseUrl, paramData);
+                    self._replaceBrowserUrl(baseUrl, paramData);
                     self._scrollAndUpdateContent(response.html);
                 } else {
                     var msg = response.error_message;
