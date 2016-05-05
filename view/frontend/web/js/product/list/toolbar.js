@@ -1,7 +1,3 @@
-/**
- * Copyright © 2016 SalesIds. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 define([
     'jquery',
@@ -20,7 +16,7 @@ define([
             directionControl: '[data-role="direction-switcher"]',
             orderControl: '[data-role="sorter"]',
             limitControl: '[data-role="limiter"]',
-            pagerControl: '[data-role="pager"]',
+            pagerControl: '.pages .page',
             mode: 'product_list_mode',
             direction: 'product_list_dir',
             order: 'product_list_order',
