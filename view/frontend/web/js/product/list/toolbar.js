@@ -115,9 +115,6 @@ define([
         },
 
 
-
-
-
         _scrollAndUpdateContent: function (content) {
             $('html, body').animate(
                 {
