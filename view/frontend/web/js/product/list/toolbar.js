@@ -163,7 +163,7 @@ define([
             });
         },
         setMessage: function (obj) {
-            var messages = ko.observableArray(obj);
+            var messages = ko.observableArray([obj]);
             messageComponent().messages({
                 messages: messages
             });
