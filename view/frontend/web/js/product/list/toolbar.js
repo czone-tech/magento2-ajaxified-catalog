@@ -1,9 +1,11 @@
 define([
     "jquery",
     "jquery/ui",
+    "Magento_Theme/js/view/messages",
+    "ko",
     "Magento_Catalog/js/product/list/toolbar"
 
-], function($) {
+], function($, ui, messageComponent, ko) {
     /**
      * ProductListToolbarForm Widget - this widget is setting cookie and submitting form according to toolbar controls
      */
@@ -138,19 +140,32 @@ define([
                 if (response.success) {
                     self.updateUrl(baseUrl, paramData);
                     self.updateContent(response.html);
+                    self.setMessage({
+                        type: 'success',
+                        text: 'Sections have been updated'
+                    });
+
                 } else {
                     var msg = response.error_message;
                     if (msg) {
-                        alert({
-                            content: $.mage.__(msg)
+                        self.setMessage({
+                            type: 'error',
+                            text: msg
                         });
                     }
                 }
             }).fail(function (error) {
-                alert({
-                    content: $.mage.__('Sorry, something went wrong. Please try again later.')
+                self.setMessage({
+                    type: 'error',
+                    text: 'Sorry, something went wrong. Please try again later.'
                 });
 
+            });
+        },
+        setMessage: function (obj) {
+            var messages = ko.observableArray(obj);
+            messageComponent().messages({
+                messages: messages
             });
         }
     });
