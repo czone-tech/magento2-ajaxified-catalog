@@ -25,8 +25,15 @@ class View
         $response = $method();
         if($response instanceof Page){
             if($subject->getRequest()->getParam('ajax') == 1){
-                $content = $response->getLayout()->getBlock('category.products')->toHtml();
-                return $this->_resultJsonFactory->create()->setData(['success' => true, 'html' => $content]);
+                $subject->getRequest()->getQuery()->offsetUnset('ajax');
+                $productsBlockHtml = $response->getLayout()->getBlock('category.products')
+                    ->toHtml();
+                $leftNavBlockHtml = $response->getLayout()->getBlock('catalog.leftnav')
+                    ->toHtml();
+                return $this->_resultJsonFactory->create()->setData(['success' => true, 'html' => [
+                    'products_list' => $productsBlockHtml,
+                    'filters' => $leftNavBlockHtml
+                ]]);
             }
         }
         return $response;

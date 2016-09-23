@@ -1,14 +1,13 @@
-
 define([
-    'jquery',
-    'Magento_Ui/js/modal/alert',
-    'mage/translate',
-    'jquery/ui'
-], function ($, alert) {
+    "jquery",
+    "jquery/ui",
+    "Magento_Catalog/js/product/list/toolbar"
+
+], function($) {
     /**
      * ProductListToolbarForm Widget - this widget is setting cookie and submitting form according to toolbar controls
      */
-    $.widget('czone.productListToolbarForm', {
+    $.widget('mage.productListToolbarForm', $.mage.productListToolbarForm, {
 
         options:
         {
@@ -27,49 +26,43 @@ define([
             orderDefault: 'position',
             limitDefault: '9',
             pagerDefault: '1',
-            contentContainer: '.column.main',
+            productsToolbarControl:'.toolbar.toolbar-products',
+            productsListBlock: '.products.wrapper',
+            layeredNavigationFilterBlock: '.block.filter',
+            filterItemControl: '.block.filter .item a',
             url: ''
         },
 
-
         _create: function () {
-            this._bind($(this.element).find(this.options.modeControl), this.options.mode, this.options.modeDefault);
-            this._bind($(this.element).find(this.options.directionControl), this.options.direction, this.options.directionDefault);
-            this._bind($(this.element).find(this.options.orderControl), this.options.order, this.options.orderDefault);
-            this._bind($(this.element).find(this.options.limitControl), this.options.limit, this.options.limitDefault);
-            this._bind($(this.element).find(this.options.pagerControl), this.options.pager, this.options.pagerDefault);
+            this._super();
+            this._bind($(this.options.pagerControl), this.options.pager, this.options.pagerDefault);
+            $(this.options.filterItemControl)
+                .off('click.'+this.namespace+'productListToolbarForm')
+                .on('click.'+this.namespace+'productListToolbarForm', {}, $.proxy(this.applyFilterToProductsList, this))
+            ;
+            //console.log('toolbar');
         },
-
-
         _bind: function (element, paramName, defaultValue) {
-            if (element.is('select')) {
-                element.on('change', { paramName: paramName, default: defaultValue }, $.proxy(this._processSelect, this));
+            /**
+             * Prevent double binding of these events because this component is being applied twice in the UI
+             */
+            if (element.is("select")) {
+                element
+                    .off('change.'+this.namespace+'productListToolbarForm')
+                    .on('change.'+this.namespace+'productListToolbarForm', {paramName: paramName, default: defaultValue}, $.proxy(this._processSelect, this));
             } else {
-                element.on('click', { paramName: paramName, default: defaultValue }, $.proxy(this._processLink, this));
+                element
+                    .off('click.'+this.namespace+'productListToolbarForm')
+                    .on('click.'+this.namespace+'productListToolbarForm', {paramName: paramName, default: defaultValue}, $.proxy(this._processLink, this));
             }
         },
-
-
-        _processLink: function (event) {
-            event.preventDefault();
-            this.ajaxSubmit(
-                event.data.paramName,
-                $(event.currentTarget).data('value'),
-                event.data.default
-            );
+        applyFilterToProductsList: function (evt) {
+            var link = $(evt.currentTarget);
+            var urlParts = link.attr('href').split('?');
+            this.makeAjaxCall(urlParts[0], urlParts[1]);
+            evt.preventDefault();
         },
-
-
-        _processSelect: function (event) {
-            event.preventDefault();
-            this.ajaxSubmit(
-                event.data.paramName,
-                event.currentTarget.options[event.currentTarget.selectedIndex].value,
-                event.data.default
-            );
-        },
-
-        _replaceBrowserUrl: function (url, paramData) {
+        updateUrl: function (url, paramData) {
             if (!url) {
                 return;
             }
@@ -82,7 +75,7 @@ define([
             }
         },
 
-        _prepareParams: function (urlParams, paramName, paramValue, defaultValue) {
+        getParams: function (urlParams, paramName, paramValue, defaultValue) {
             var paramData = {},
                 parameters;
 
@@ -99,26 +92,21 @@ define([
             if (paramValue == defaultValue) {
                 delete paramData[paramName];
             }
-
             return window.decodeURIComponent($.param(paramData).replace(/\+/g, '%20'));
         },
-
-
         _updateContent: function (content) {
-            // Remove all products wrappers except the first one
-            $(this.options.contentContainer).slice(1).remove();
-
-            // Update content
-            $(this.options.contentContainer)
-                .html(content)
-                .trigger('contentUpdated');
+            $(this.options.productsToolbarControl).remove();
+            $(this.options.productsListBlock)
+                .replaceWith(content.products_list)
+            ;
+            $(this.options.layeredNavigationFilterBlock).replaceWith(content.filters)
+            $('body').trigger('contentUpdated');
         },
 
-
-        _scrollAndUpdateContent: function (content) {
+        updateContent: function (content) {
             $('html, body').animate(
                 {
-                    scrollTop: $(this.options.contentContainer).offset().top
+                    scrollTop: $(this.options.productsToolbarControl+":first").offset().top
                 },
                 100,
                 'swing',
@@ -127,14 +115,17 @@ define([
         },
 
 
-        ajaxSubmit: function (paramName, paramValue, defaultValue) {
+        changeUrl: function (paramName, paramValue, defaultValue) {
             var urlPaths = this.options.url.split('?'),
                 baseUrl = urlPaths[0],
                 urlParams = urlPaths[1] ? urlPaths[1].split('&') : [],
-                paramData = this._prepareParams(urlParams, paramName, paramValue, defaultValue);
+                paramData = this.getParams(urlParams, paramName, paramValue, defaultValue);
 
+            this.makeAjaxCall(baseUrl, paramData);
+        },
+
+        makeAjaxCall: function (baseUrl, paramData) {
             var self = this;
-
             $.ajax({
                 url: baseUrl,
                 data: (paramData.length > 0 ? paramData + '&ajax=1' : 'ajax=1'),
@@ -145,8 +136,8 @@ define([
                 timeout: 10000
             }).done(function (response) {
                 if (response.success) {
-                    self._replaceBrowserUrl(baseUrl, paramData);
-                    self._scrollAndUpdateContent(response.html);
+                    self.updateUrl(baseUrl, paramData);
+                    self.updateContent(response.html);
                 } else {
                     var msg = response.error_message;
                     if (msg) {
@@ -159,10 +150,10 @@ define([
                 alert({
                     content: $.mage.__('Sorry, something went wrong. Please try again later.')
                 });
-                console.log(JSON.stringify(error));
+
             });
         }
     });
 
-    return $.czone.productListToolbarForm;
+    return $.mage.productListToolbarForm;
 });
