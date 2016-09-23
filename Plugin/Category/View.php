@@ -25,7 +25,15 @@ class View
         $response = $method();
         if($response instanceof Page){
             if($subject->getRequest()->getParam('ajax') == 1){
-                $subject->getRequest()->getQuery()->offsetUnset('ajax');
+
+                $subject->getRequest()->getQuery()->set('ajax', null);
+                $requestUri = $subject->getRequest()->getRequestUri();
+                $requestUri = preg_replace('/(\?|&)ajax=1/', '', $requestUri);
+                $subject->getRequest()->setRequestUri($requestUri);
+
+                //$ajaxParam = $subject->getRequest()->getQuery('ajax');
+                //$requestUri = $subject->getRequest()->getRequestUri();
+
                 $productsBlockHtml = $response->getLayout()->getBlock('category.products')
                     ->toHtml();
                 $leftNavBlockHtml = $response->getLayout()->getBlock('catalog.leftnav')
