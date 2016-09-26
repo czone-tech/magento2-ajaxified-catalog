@@ -1,6 +1,6 @@
 {
   "name": "czone-tech/ajaxified-catalog",
-  "description": "Implements AJAX loading in layered navigation and product list sections",
+  "description": "Implements AJAX loading in layered navigation and product list sections. Contact ashish@czonetechnologies.com for support",
   "type": "magento2-module",
   "version": "1.0.0",
   "require": {

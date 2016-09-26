@@ -1,3 +1,9 @@
+/**
+ * Copyright © 2016 CzoneTechnologies. All rights reserved.
+ * For support requests, contact
+ * ashish@czonetechnologies.com
+ */
+
 define([
     "jquery",
     "jquery/ui",

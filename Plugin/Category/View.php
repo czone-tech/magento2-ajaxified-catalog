@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: ashish
- * Date: 5/5/16
- * Time: 5:55 PM
+ * Copyright © 2016 CzoneTechnologies. All rights reserved.
+ * For support requests, contact
+ * ashish@czonetechnologies.com
  */
 
 namespace CzoneTech\AjaxifiedCatalog\Plugin\Category;
