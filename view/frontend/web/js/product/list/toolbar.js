@@ -136,7 +136,7 @@ define([
             var self = this;
             $.ajax({
                 url: baseUrl,
-                data: (paramData.length > 0 ? paramData + '&ajax=1' : 'ajax=1'),
+                data: (paramData && paramData.length > 0 ? paramData + '&ajax=1' : 'ajax=1'),
                 type: 'get',
                 dataType: 'json',
                 cache: true,
