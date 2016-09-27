@@ -23,7 +23,7 @@ define([
             directionControl: '[data-role="direction-switcher"]',
             orderControl: '[data-role="sorter"]',
             limitControl: '[data-role="limiter"]',
-            pagerControl: '[data-role="pager"], .pages-items .page',
+            pagerControl: '[data-role="pager"], .pages-items a',
             mode: 'product_list_mode',
             direction: 'product_list_dir',
             order: 'product_list_order',
