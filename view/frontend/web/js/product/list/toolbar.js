@@ -23,7 +23,7 @@ define([
             directionControl: '[data-role="direction-switcher"]',
             orderControl: '[data-role="sorter"]',
             limitControl: '[data-role="limiter"]',
-            pagerControl: '[data-role="pager"]',
+            pagerControl: '[data-role="pager"], .pages-items .page',
             mode: 'product_list_mode',
             direction: 'product_list_dir',
             order: 'product_list_order',
@@ -37,7 +37,7 @@ define([
             productsToolbarControl:'.toolbar.toolbar-products',
             productsListBlock: '.products.wrapper',
             layeredNavigationFilterBlock: '.block.filter',
-            filterItemControl: '.block.filter .item a',
+            filterItemControl: '.block.filter .item a, .block.filter .filter-clear,.block.filter .swatch-option-link-layered',
             url: ''
         },
 
