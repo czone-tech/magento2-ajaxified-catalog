@@ -74,7 +74,7 @@ define([
             if (!url) {
                 return;
             }
-            if (paramData.length > 0) {
+            if (paramData && paramData.length > 0) {
                 url += '?' + paramData;
             }
 
