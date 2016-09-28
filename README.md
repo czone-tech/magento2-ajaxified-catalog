@@ -32,4 +32,4 @@ Using command line access to your server, run the following commands -
 
 
 ## Screenshot
-![image](https://cloud.githubusercontent.com/assets/1729518/18911185/372d6b4c-8599-11e6-926b-bca83dc0b266.png)
+![CzoneTech_AjaxifiedCatalog](https://cloud.githubusercontent.com/assets/1729518/18914661/a9f63caa-85ab-11e6-9598-85a2eaa387df.png)
