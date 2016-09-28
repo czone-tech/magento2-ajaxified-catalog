@@ -1,6 +1,8 @@
 ## Ajax Layered Navigation module for Magento2
 This module applies AJAX on the products catalog page. The left layered navigation block links are also modified to load via AJAX.
 
+The module has been tested with Magento 2.0.x and 2.1.x, however, it should work fine for other Magento 2.x versions as well.
+Please note that while this module works oob for Magento_Blank and Magento_Luma themes, it may break if a custom theme modifies certain view files related to layered navigation or products list block. This seems an unavoidable issue at the moment.
 If you have any issues using this module, you may contact us at support@czonetechnologies.com
 
 ###Why AJAX?
