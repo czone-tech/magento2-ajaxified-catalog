@@ -3,5 +3,10 @@
         <plugin name="CzoneTech_AjaxifiedCatalog_Category_View"
                 type="CzoneTech\AjaxifiedCatalog\Plugin\Category\View"></plugin>
             </type>
+    <type name="Magento\CatalogSearch\Controller\Result\Index">
+        <plugin name="CzoneTech_AjaxifiedCatalog_CatalogSearch_Result"
+                type="CzoneTech\AjaxifiedCatalog\Plugin\CatalogSearch\Result"></plugin>
+    </type>
+
 
 </config>

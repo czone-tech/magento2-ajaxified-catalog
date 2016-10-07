@@ -104,10 +104,16 @@ define([
         },
         _updateContent: function (content) {
             $(this.options.productsToolbarControl).remove();
-            $(this.options.productsListBlock)
-                .replaceWith(content.products_list)
-            ;
-            $(this.options.layeredNavigationFilterBlock).replaceWith(content.filters)
+            if(content.products_list){
+                $(this.options.productsListBlock)
+                    .replaceWith(content.products_list)
+                ;
+            }
+
+            if(content.filters){
+                $(this.options.layeredNavigationFilterBlock).replaceWith(content.filters)
+            }
+
             $('body').trigger('contentUpdated');
         },
 
