@@ -21,7 +21,6 @@ For faster loading of the catalog section, it is necessary that we do not rebuil
 #####Using Composer
 
 ```
-composer config repositories.czone-tech composer https://repo.czonetechnologies.com
 composer require czonetech/ajaxified-catalog
 ```
 
