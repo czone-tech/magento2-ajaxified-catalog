@@ -22,7 +22,7 @@ For faster loading of the catalog section, it is necessary that we do not rebuil
 
 ```
 composer config repositories.czone-tech composer https://repo.czonetechnologies.com
-composer require czone-tech/ajaxified-catalog
+composer require czonetech/ajaxified-catalog
 ```
 
 ####2 -  Enabling the module
