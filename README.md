@@ -27,8 +27,12 @@ composer require czonetech/ajaxified-catalog
 ####2 -  Enabling the module
 Using command line access to your server, run the following commands -
 ```
- $ php -f bin/magento module:enable --clear-static-content CzoneTech_AjaxifiedCatalog
- $ php -f bin/magento setup:upgrade
+ $ cd <magento-installation-dir>
+ $ php bin/magento module:enable --clear-static-content CzoneTech_AjaxifiedCatalog
+ $ php bin/magento setup:upgrade
+ $ rm -r var
+ $ php bin/magento setup:di:compile
+ $ php bin/magento cache:clean
 ```
 
 
