@@ -9,6 +9,15 @@ If you have any issues using this module, you may contact us at support@czonetec
 Catalog is the most visited section of any e-commerce site. A fast loading catalog section is intrinstic to a superior user experience.
 For faster loading of the catalog section, it is necessary that we do not rebuild the entire page on each request, instead only the minimum required sections are rebuilt. This results in a faster UX.
 
+#### Demo
+You can see this extension in action here-
+
+1. Products Catalog page-
+http://work.czonetechnologies.com/mage2.0/women/tops-women/jackets-women.html
+
+2. Catalog Search page-
+http://work.czonetechnologies.com/mage2.0/catalogsearch/result/?q=jacket
+
 ####1 - Installation
 ##### Manual Installation
 
