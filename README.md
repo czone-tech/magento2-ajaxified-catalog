@@ -14,9 +14,11 @@ You can see this extension in action here-
 
 1. Products Catalog page-
 http://work.czonetechnologies.com/mage2.0/women/tops-women/jackets-women.html
+http://work.czonetechnologies.com/mage2.1/women/tops-women/jackets-women.html
 
 2. Catalog Search page-
 http://work.czonetechnologies.com/mage2.0/catalogsearch/result/?q=jacket
+http://work.czonetechnologies.com/mage2.1/catalogsearch/result/?q=jacket
 
 ####1 - Installation
 ##### Manual Installation
