@@ -39,7 +39,7 @@ Using command line access to your server, run the following commands -
  $ cd <magento-installation-dir>
  $ php bin/magento module:enable --clear-static-content CzoneTech_AjaxifiedCatalog
  $ php bin/magento setup:upgrade
- $ rm -r var
+ $ rm -r var/di
  $ php bin/magento setup:di:compile
  $ php bin/magento cache:clean
 ```
