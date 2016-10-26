@@ -1,5 +1,13 @@
 {
   "name": "czonetech/ajaxified-catalog",
+  "authors":[
+    {
+      "name": "Czone Technologies",
+      "email": "support@czonetechnologies.com",
+      "homepage": "http://www.czonetechnologies.com/"
+    }
+  ],
+  "license": "GPL-2.0+",
   "description": "Implements AJAX loading in layered navigation and product list sections.",
   "keywords": [
     "magento 2",
