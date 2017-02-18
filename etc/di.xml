@@ -1,12 +1,15 @@
+<?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Catalog\Controller\Category\View">
         <plugin name="CzoneTech_AjaxifiedCatalog_Category_View"
                 type="CzoneTech\AjaxifiedCatalog\Plugin\Category\View"></plugin>
-            </type>
+    </type>
     <type name="Magento\CatalogSearch\Controller\Result\Index">
         <plugin name="CzoneTech_AjaxifiedCatalog_CatalogSearch_Result"
                 type="CzoneTech\AjaxifiedCatalog\Plugin\CatalogSearch\Result"></plugin>
     </type>
-
-
+    <type name="Magento\CatalogSearch\Controller\Advanced\Result">
+        <plugin name="CzoneTech_AjaxifiedCatalog_CatalogSearch_Advanced"
+                type="CzoneTech\AjaxifiedCatalog\Plugin\CatalogSearch\Advanced"></plugin>
+    </type>
 </config>

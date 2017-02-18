@@ -37,7 +37,7 @@ define([
             productsToolbarControl:'.toolbar.toolbar-products',
             productsListBlock: '.products.wrapper',
             layeredNavigationFilterBlock: '.block.filter',
-            filterItemControl: '.block.filter .item a, .block.filter .filter-clear,.block.filter .swatch-option-link-layered',
+            filterItemControl: '.block.filter .item a, .block.filter .filter-clear,.block.filter .swatch-option-link-layered, .pages-items a',
             url: ''
         },
 

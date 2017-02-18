@@ -8,7 +8,6 @@
 
 namespace CzoneTech\AjaxifiedCatalog\Plugin\CatalogSearch;
 
-
 use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\ObjectManagerInterface;
@@ -18,7 +17,6 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Result
 {
-
     /**
      * Catalog session
      *
@@ -41,12 +39,21 @@ class Result
      *
      * @var Resolver
      */
-    private $layerResolver;
+    protected $layerResolver;
 
+    /**
+     * @var JsonFactory
+     */
     protected $_resultJsonFactory;
 
+    /**
+     * @var PageFactory
+     */
     protected $_resultPageFactory;
 
+    /**
+     * @var ObjectManagerInterface
+     */
     protected $_objectManager;
 
     /**
@@ -55,6 +62,8 @@ class Result
      * @param StoreManagerInterface $storeManager
      * @param QueryFactory $queryFactory
      * @param Resolver $layerResolver
+     * @param JsonFactory $resultJsonFactory
+     * @param PageFactory $resultPageFactory
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -72,8 +81,10 @@ class Result
         $this->_objectManager = $objectManager;
     }
 
-    public function aroundExecute(\Magento\CatalogSearch\Controller\Result\Index $subject, \Closure
-    $method){
+    public function aroundExecute(
+        \Magento\CatalogSearch\Controller\Result\Index $subject,
+        \Closure $method
+    ){
         if($subject->getRequest()->getParam('ajax') == 1){
             $this->layerResolver->create(Resolver::CATALOG_LAYER_SEARCH);
             /* @var $query \Magento\Search\Model\Query */
