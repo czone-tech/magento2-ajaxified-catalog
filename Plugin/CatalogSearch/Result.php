@@ -86,6 +86,12 @@ class Result
         \Closure $method
     ){
         if($subject->getRequest()->getParam('ajax') == 1){
+
+            $subject->getRequest()->getQuery()->set('ajax', null);
+            $requestUri = $subject->getRequest()->getRequestUri();
+            $requestUri = preg_replace('/(\?|&)ajax=1/', '', $requestUri);
+            $subject->getRequest()->setRequestUri($requestUri);
+            
             $this->layerResolver->create(Resolver::CATALOG_LAYER_SEARCH);
             /* @var $query \Magento\Search\Model\Query */
             $query = $this->_queryFactory->get();
